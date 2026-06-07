@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,14 +14,21 @@
   "@type": "Plumber",
   "name": "Yves Plumbing",
   "description": "Family-owned Ottawa plumbing company offering general plumbing, water softeners, leak detection, kitchen and bathroom plumbing. Licensed and quality approved.",
-  "telephone": "(505) 123-4567",
+  "telephone": "613-913-0367",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Ottawa",
     "addressRegion": "ON",
     "addressCountry": "CA"
   },
-  "openingHours": "Mo-Su 07:00-19:00",
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "opens": "08:00",
+      "closes": "16:30"
+    }
+  ],
   "priceRange": "$$",
   "aggregateRating": {
     "@type": "AggregateRating",
@@ -83,37 +89,16 @@
       "name": "How much does a plumber cost in Ottawa?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Pricing varies by job. We offer free quotes with no obligation. Call us or request a quote online and we'll provide transparent pricing upfront."
+        "text": "Pricing varies by job. We offer free quotes with no obligation. Call us and we'll provide transparent pricing upfront."
       }
-    }
-  ]
-}
-</script>
-
-<!-- Review Schema -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Yves Plumbing",
-  "review": [
-    {
-      "@type": "Review",
-      "author": {"@type": "Person", "name": "Sarah Michell"},
-      "reviewRating": {"@type": "Rating", "ratingValue": "5"},
-      "reviewBody": "Absolutely fantastic service. They fixed our kitchen tap in under an hour — very professional, transparent pricing, and you can tell this is a family business that genuinely cares about doing things right."
     },
     {
-      "@type": "Review",
-      "author": {"@type": "Person", "name": "James Rodriguez"},
-      "reviewRating": {"@type": "Rating", "ratingValue": "5"},
-      "reviewBody": "They installed our water softener perfectly. The difference in water quality is night and day. Quality first — that's their motto and they live by every word of it."
-    },
-    {
-      "@type": "Review",
-      "author": {"@type": "Person", "name": "Linda Kowalski"},
-      "reviewRating": {"@type": "Rating", "ratingValue": "5"},
-      "reviewBody": "Called in the morning, they were here by noon. Our shower has never worked better. True professionals who build trust with every single job they take on."
+      "@type": "Question",
+      "name": "What are your hours?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We are open Monday to Friday, 8:00 AM to 4:30 PM."
+      }
     }
   ]
 }
@@ -216,12 +201,6 @@
     white-space: nowrap;
   }
 
-  .header-phone {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
   .header-phone a {
     color: var(--dark);
     text-decoration: none;
@@ -244,7 +223,7 @@
 
   @media (max-width: 768px) {
     .header-badges { display: none; }
-    .header-phone a { display: none; }
+    .header-phone { display: none; }
   }
 
   /* HERO */
@@ -298,8 +277,6 @@
     color: var(--dark);
   }
 
-  .pill-icon { font-size: 14px; }
-
   .hero h1 {
     font-family: 'Playfair Display', serif;
     font-size: clamp(38px, 5vw, 60px);
@@ -331,31 +308,26 @@
     text-decoration: none;
     font-weight: 700;
     font-size: 16px;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 8px;
     transition: background 0.2s;
   }
   .btn-primary:hover { background: var(--orange-dark); }
 
-  .hero-image {
-    position: relative;
-  }
-
+  /* HERO IMAGE */
   .hero-image-wrap {
     border-radius: 16px;
     overflow: hidden;
-    background: linear-gradient(135deg, #e8611a22, #e8611a44);
     height: 420px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     position: relative;
   }
 
-  .hero-placeholder {
-    font-size: 120px;
-    opacity: 0.15;
+  .hero-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   .hero-badge-float {
@@ -385,6 +357,17 @@
     color: var(--gray);
     line-height: 1.3;
   }
+
+  /* HOURS STRIP */
+  .hours-strip {
+    background: var(--dark);
+    color: white;
+    padding: 14px 24px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .hours-strip span { color: var(--orange); font-weight: 700; }
 
   /* FEATURES STRIP */
   .features-strip {
@@ -423,16 +406,8 @@
     flex-shrink: 0;
   }
 
-  .feature-text strong {
-    display: block;
-    font-size: 14px;
-    font-weight: 700;
-  }
-
-  .feature-text span {
-    font-size: 12px;
-    color: var(--gray);
-  }
+  .feature-text strong { display: block; font-size: 14px; font-weight: 700; }
+  .feature-text span { font-size: 12px; color: var(--gray); }
 
   /* SECTIONS */
   .section { padding: 80px 24px; }
@@ -480,9 +455,7 @@
     transition: box-shadow 0.2s;
   }
 
-  .why-card:hover {
-    box-shadow: 0 8px 32px rgba(232,97,26,0.08);
-  }
+  .why-card:hover { box-shadow: 0 8px 32px rgba(232,97,26,0.08); }
 
   .why-icon {
     width: 52px; height: 52px;
@@ -502,11 +475,7 @@
     margin-bottom: 10px;
   }
 
-  .why-card p {
-    color: var(--gray);
-    font-size: 15px;
-    line-height: 1.7;
-  }
+  .why-card p { color: var(--gray); font-size: 15px; line-height: 1.7; }
 
   /* SERVICES */
   .services-grid {
@@ -527,37 +496,19 @@
     box-shadow: 0 4px 20px rgba(232,97,26,0.08);
   }
 
-  .service-icon {
-    font-size: 32px;
-    margin-bottom: 14px;
-  }
-
-  .service-card h3 {
-    font-weight: 700;
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-
-  .service-card p {
-    color: var(--gray);
-    font-size: 15px;
-    margin-bottom: 16px;
-    line-height: 1.6;
-  }
+  .service-icon { font-size: 32px; margin-bottom: 14px; }
+  .service-card h3 { font-weight: 700; font-size: 18px; margin-bottom: 10px; }
+  .service-card p { color: var(--gray); font-size: 15px; margin-bottom: 16px; line-height: 1.6; }
 
   .service-link {
     color: var(--orange);
     text-decoration: none;
     font-weight: 600;
     font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 4px;
   }
-
   .service-link:hover { color: var(--orange-dark); }
 
-  /* RATING SECTION */
+  /* RATING */
   .rating-section {
     background: var(--orange);
     color: white;
@@ -565,12 +516,7 @@
     text-align: center;
   }
 
-  .rating-stars {
-    font-size: 40px;
-    margin-bottom: 10px;
-    letter-spacing: 4px;
-  }
-
+  .rating-stars { font-size: 40px; margin-bottom: 10px; letter-spacing: 4px; }
   .rating-num {
     font-family: 'Playfair Display', serif;
     font-size: 72px;
@@ -578,13 +524,7 @@
     line-height: 1;
     margin-bottom: 8px;
   }
-
-  .rating-sub {
-    font-size: 17px;
-    opacity: 0.85;
-    margin-bottom: 28px;
-  }
-
+  .rating-sub { font-size: 17px; opacity: 0.85; margin-bottom: 28px; }
   .rating-platforms {
     display: flex;
     justify-content: center;
@@ -624,25 +564,10 @@
     border: 1.5px solid var(--border);
   }
 
-  .review-stars {
-    color: var(--orange);
-    font-size: 16px;
-    margin-bottom: 14px;
-  }
+  .review-stars { color: var(--orange); font-size: 16px; margin-bottom: 14px; }
+  .review-text { font-size: 15px; color: var(--dark); line-height: 1.7; margin-bottom: 18px; font-style: italic; }
 
-  .review-text {
-    font-size: 15px;
-    color: var(--dark);
-    line-height: 1.7;
-    margin-bottom: 18px;
-    font-style: italic;
-  }
-
-  .reviewer {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+  .reviewer { display: flex; align-items: center; gap: 10px; }
 
   .reviewer-avatar {
     width: 38px; height: 38px;
@@ -656,43 +581,17 @@
     font-size: 14px;
   }
 
-  .reviewer-name {
-    font-weight: 700;
-    font-size: 14px;
-  }
-
-  .reviewer-loc {
-    font-size: 12px;
-    color: var(--gray);
-  }
+  .reviewer-name { font-weight: 700; font-size: 14px; }
+  .reviewer-loc { font-size: 12px; color: var(--gray); }
 
   /* FAQ */
   .faq-section { background: var(--cream); padding: 80px 24px; }
+  .faq-list { margin-top: 52px; max-width: 760px; }
 
-  .faq-list {
-    margin-top: 52px;
-    max-width: 760px;
-  }
-
-  .faq-item {
-    border-bottom: 1.5px solid var(--border);
-    padding: 22px 0;
-  }
-
+  .faq-item { border-bottom: 1.5px solid var(--border); padding: 22px 0; }
   .faq-item:first-child { border-top: 1.5px solid var(--border); }
-
-  .faq-q {
-    font-weight: 700;
-    font-size: 17px;
-    margin-bottom: 10px;
-    color: var(--dark);
-  }
-
-  .faq-a {
-    color: var(--gray);
-    font-size: 15px;
-    line-height: 1.7;
-  }
+  .faq-q { font-weight: 700; font-size: 17px; margin-bottom: 10px; color: var(--dark); }
+  .faq-a { color: var(--gray); font-size: 15px; line-height: 1.7; }
 
   /* CTA */
   .cta-section {
@@ -746,10 +645,10 @@
   }
   .cta-phone-big:hover { color: var(--orange-light); }
 
-  .cta-note {
+  .cta-hours {
     margin-top: 20px;
-    font-size: 13px;
-    color: rgba(255,255,255,0.35);
+    font-size: 14px;
+    color: rgba(255,255,255,0.4);
   }
 
   /* FOOTER */
@@ -761,11 +660,7 @@
     font-size: 13px;
   }
 
-  footer a {
-    color: rgba(255,255,255,0.45);
-    text-decoration: none;
-  }
-
+  footer a { color: rgba(255,255,255,0.45); text-decoration: none; }
   .footer-logo {
     font-family: 'Playfair Display', serif;
     font-size: 20px;
@@ -779,7 +674,7 @@
 
 <!-- MOBILE CALL BAR -->
 <div class="mobile-bar">
-  <a href="tel:5051234567">📞 Call Now — (505) 123-4567 — Free Quote</a>
+  <a href="tel:6139130367">📞 Call Now — 613-913-0367 — Free Quote</a>
 </div>
 
 <!-- HEADER -->
@@ -792,12 +687,17 @@
         <span class="badge">✓ Quality Approved</span>
       </div>
       <div class="header-phone">
-        <a href="tel:5051234567">📞 (505) 123-4567</a>
+        <a href="tel:6139130367">📞 613-913-0367</a>
       </div>
-      <a href="tel:5051234567" class="btn-quote">Get a Quote →</a>
+      <a href="tel:6139130367" class="btn-quote">Get a Quote →</a>
     </div>
   </div>
 </header>
+
+<!-- HOURS STRIP -->
+<div class="hours-strip">
+  🕐 Hours: <span>Monday – Friday, 8:00 AM – 4:30 PM</span> &nbsp;·&nbsp; 📞 <a href="tel:6139130367" style="color:var(--orange); text-decoration:none; font-weight:700;">613-913-0367</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -808,20 +708,25 @@
         <span>4.8/5 from 500+ reviews</span>
       </div>
       <div class="trust-pills">
-        <span class="pill"><span class="pill-icon">✓</span> Quality Approved</span>
-        <span class="pill"><span class="pill-icon">⚡</span> Same-Day Service</span>
-        <span class="pill"><span class="pill-icon">🏠</span> Family-Owned</span>
-        <span class="pill"><span class="pill-icon">🛡</span> Built to Last</span>
+        <span class="pill">✓ Quality Approved</span>
+        <span class="pill">⚡ Same-Day Service</span>
+        <span class="pill">🏠 Family-Owned</span>
+        <span class="pill">🛡 Built to Last</span>
       </div>
       <h1>Quality First.<br>Built to Last.</h1>
       <p>Three generations of plumbing excellence in Ottawa. A family-owned company dedicated to delivering quality-approved work you can trust — every time, without exception.</p>
       <div class="hero-actions">
-        <a href="tel:5051234567" class="btn-primary">📞 Get Your Free Quote</a>
+        <a href="tel:6139130367" class="btn-primary">📞 Get Your Free Quote</a>
       </div>
     </div>
     <div class="hero-image">
       <div class="hero-image-wrap">
-        <div class="hero-placeholder">🔧</div>
+        <img
+          src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+          alt="Licensed Ottawa plumber working on pipes"
+          loading="eager"
+          onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg,#e8611a22,#e8611a44)'"
+        />
         <div class="hero-badge-float">
           <div class="num">500+</div>
           <div class="label">Happy Families<br>in Ottawa</div>
@@ -898,49 +803,42 @@
     <h2 class="section-title">Comprehensive Plumbing<br>Services in Ottawa</h2>
     <p class="section-sub">From routine maintenance to complex installations, our licensed Ottawa team handles it all with precision and care.</p>
     <div class="services-grid">
-
       <div class="service-card">
         <div class="service-icon">🔧</div>
         <h3>General Plumbing</h3>
         <p>Complete repairs, installations, and preventative maintenance for every plumbing system in your Ottawa home.</p>
-        <a href="tel:5051234567" class="service-link">Get a quote →</a>
+        <a href="tel:6139130367" class="service-link">Get a quote →</a>
       </div>
-
       <div class="service-card">
         <div class="service-icon">💧</div>
         <h3>Water Softeners</h3>
         <p>Professional water softening system installation and servicing to protect your Ottawa home from hard water damage.</p>
-        <a href="tel:5051234567" class="service-link">Get a quote →</a>
+        <a href="tel:6139130367" class="service-link">Get a quote →</a>
       </div>
-
       <div class="service-card">
         <div class="service-icon">🍳</div>
         <h3>Kitchen Plumbing</h3>
         <p>Sink repairs, garbage disposals, dishwasher hookups, and full kitchen fixture and faucet upgrades.</p>
-        <a href="tel:5051234567" class="service-link">Get a quote →</a>
+        <a href="tel:6139130367" class="service-link">Get a quote →</a>
       </div>
-
       <div class="service-card">
         <div class="service-icon">🚿</div>
         <h3>Shower & Bath</h3>
         <p>Custom shower installs, bathtub repairs, and luxury fixture replacements for any Ottawa bathroom.</p>
-        <a href="tel:5051234567" class="service-link">Get a quote →</a>
+        <a href="tel:6139130367" class="service-link">Get a quote →</a>
       </div>
-
       <div class="service-card">
         <div class="service-icon">🔍</div>
         <h3>Leak Detection</h3>
         <p>Non-invasive leak detection technology to protect your Ottawa home from costly water damage before it spreads.</p>
-        <a href="tel:5051234567" class="service-link">Get a quote →</a>
+        <a href="tel:6139130367" class="service-link">Get a quote →</a>
       </div>
-
       <div class="service-card">
         <div class="service-icon">🛁</div>
         <h3>Bathroom Remodels</h3>
         <p>End-to-end bathroom plumbing for renovations of every scale across Ottawa homes and properties.</p>
-        <a href="tel:5051234567" class="service-link">Get a quote →</a>
+        <a href="tel:6139130367" class="service-link">Get a quote →</a>
       </div>
-
     </div>
   </div>
 </section>
@@ -954,9 +852,8 @@
     <span>Google ★★★★★</span>
     <span>Yelp ★★★★★</span>
     <span>HomeStars ★★★★★</span>
-    <span>BBB ★★★★★</span>
   </div>
-  <a href="tel:5051234567" class="btn-white">📞 Talk to Our Team →</a>
+  <a href="tel:6139130367" class="btn-white">📞 Talk to Our Team →</a>
 </section>
 
 <!-- REVIEWS -->
@@ -965,7 +862,6 @@
     <div class="section-label">Client Testimonials</div>
     <h2 class="section-title">Trusted by Ottawa<br>Homeowners Like You</h2>
     <div class="reviews-grid">
-
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
         <p class="review-text">"Absolutely fantastic service. They fixed our kitchen tap in under an hour — very professional, transparent pricing, and you can tell this is a family business that genuinely cares about doing things right."</p>
@@ -977,7 +873,6 @@
           </div>
         </div>
       </div>
-
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
         <p class="review-text">"They installed our water softener perfectly. The difference in water quality is night and day. Quality first — that's their motto and they live by every word of it."</p>
@@ -989,7 +884,6 @@
           </div>
         </div>
       </div>
-
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
         <p class="review-text">"Called in the morning, they were here by noon. Our shower has never worked better. True professionals who build trust with every single job they take on."</p>
@@ -1001,7 +895,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
@@ -1012,32 +905,30 @@
     <div class="section-label">Common Questions</div>
     <h2 class="section-title">Frequently Asked Questions</h2>
     <div class="faq-list">
-
       <div class="faq-item">
         <div class="faq-q">Do you offer same-day plumbing service in Ottawa?</div>
         <div class="faq-a">Yes. Yves Plumbing offers same-day service across Ottawa. Call us and we'll dispatch a licensed plumber to your home as quickly as possible.</div>
       </div>
-
       <div class="faq-item">
         <div class="faq-q">Are you a licensed plumber in Ottawa?</div>
         <div class="faq-a">Yes. We are fully licensed and quality approved. All work is backed by our satisfaction guarantee.</div>
       </div>
-
+      <div class="faq-item">
+        <div class="faq-q">What are your hours?</div>
+        <div class="faq-a">We are open Monday to Friday, 8:00 AM to 4:30 PM. Call us at 613-913-0367 to book your appointment.</div>
+      </div>
       <div class="faq-item">
         <div class="faq-q">What plumbing services do you offer in Ottawa?</div>
         <div class="faq-a">We offer general plumbing, water softener installation, kitchen plumbing, shower and bath repairs, non-invasive leak detection, and full bathroom remodels.</div>
       </div>
-
       <div class="faq-item">
         <div class="faq-q">How much does a plumber cost in Ottawa?</div>
-        <div class="faq-a">Pricing varies by job. We offer free quotes with transparent pricing upfront — no surprises. Call us or click to get your free estimate.</div>
+        <div class="faq-a">Pricing varies by job. We offer free quotes with transparent pricing upfront — no surprises. Call 613-913-0367 to get your free estimate.</div>
       </div>
-
       <div class="faq-item">
         <div class="faq-q">What areas of Ottawa do you serve?</div>
         <div class="faq-a">We serve all of Ottawa including Kanata, Barrhaven, Gloucester, Nepean, Riverside South, Orléans, and surrounding communities.</div>
       </div>
-
     </div>
   </div>
 </section>
@@ -1048,16 +939,15 @@
   <div class="cta-tagline">Family Owned · Quality Approved · Built to Last</div>
   <h2>Let's Get Started</h2>
   <p>Whether it's a quick fix or a full renovation, we're here to help. Call us directly for immediate service.</p>
-  <a href="tel:5051234567" class="cta-phone-big">(505) 123-4567</a>
-  <br>
-  <a href="tel:5051234567" class="btn-primary" style="display:inline-flex; font-size:17px; padding: 16px 36px;">📞 Get Your Free Quote</a>
-  <p class="cta-note">Available 7 days a week · Ottawa, ON · Licensed & Insured</p>
+  <a href="tel:6139130367" class="cta-phone-big">613-913-0367</a>
+  <a href="tel:6139130367" class="btn-primary" style="font-size:17px; padding: 16px 36px; margin: 0 auto; display:inline-flex;">📞 Get Your Free Quote</a>
+  <p class="cta-hours">Monday – Friday · 8:00 AM – 4:30 PM · Ottawa, ON · Licensed & Insured</p>
 </section>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">Yves Plumbing</div>
-  <p>© 2025 Yves Plumbing · Ottawa, ON · <a href="tel:5051234567">(505) 123-4567</a></p>
+  <p>© 2025 Yves Plumbing · Ottawa, ON · <a href="tel:6139130367">613-913-0367</a> · Mon–Fri 8AM–4:30PM</p>
   <p style="margin-top: 8px;"><a href="#">Privacy Policy</a> · Serving Ottawa, Kanata, Barrhaven, Nepean, Gloucester, Orléans & Riverside South</p>
 </footer>
 
